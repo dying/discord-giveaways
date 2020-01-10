@@ -85,6 +85,7 @@ async function start(channel, options, settings){
                 messageID: msg.id,
                 channelID: channel.id,
                 guildID: channel.guild.id,
+                roleLimit: options.roleLimit,
                 prize: options.prize,
                 time: options.time,
                 createdAt: Date.now(),
@@ -134,6 +135,12 @@ async function endGiveaway(giveawayData, channel, message, settings){
                 }
             });
         });
+        users.forEach((user) => {
+            let member = guild.members.get(user.id);
+            if (member.roles.find(role => role.name == giveawayData.roleLimit)) {
+                users = users.filter((u) => u.id !== user.id);
+            };
+        })
         if(users.size > 0){
             let uWinners = users.random(giveawayData.winnersCount).filter((u) => u);
             let winners = uWinners.map((w) => "<@"+w.id+">").join(", ");
