@@ -117,8 +117,8 @@ module.exports = {
             if(!options.winnersCount || isNaN(options.winnersCount)){
                 return reject(options.winnersCount+" is not a number.");
             }
-            if(!options.roleLimit || !guildChannel.guild.roles.find(role => role.name === option.roleLimit)){
-                options.roleLimit = guildChannel.guild.id
+            if(!options.roleLimit || isNaN(options.roleLimit)) {
+                return reject(options.roleLimit+" is not a number.");
             }
             utils.start(guildChannel, options, settings).then((data) => {
                 resolve({
