@@ -137,7 +137,7 @@ async function endGiveaway(giveawayData, channel, message, settings){
         });
         users.forEach((user) => {
             let member = guild.members.get(user.id);
-            if (member.roles.get(giveawayData.roleLimit)) {
+            if (!member.roles.get(giveawayData.roleLimit)) {
                 users = users.filter((u) => u.id !== user.id);
             };
         });
