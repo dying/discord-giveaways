@@ -199,6 +199,12 @@ module.exports = {
                             }
                         });
                     });
+                    users.forEach((user) => {
+                        let member = guild.members.get(user.id);
+                        if (member.roles.get(giveawayData.roleLimit)) {
+                            users = users.filter((u) => u.id !== user.id);
+                        };
+                    });
                     if(users.size < 1){
                         channel.send(options.error);
                         resolve("Return error message");

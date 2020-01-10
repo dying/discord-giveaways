@@ -140,7 +140,7 @@ async function endGiveaway(giveawayData, channel, message, settings){
             if (member.roles.get(giveawayData.roleLimit)) {
                 users = users.filter((u) => u.id !== user.id);
             };
-        })
+        });
         if(users.size > 0){
             let uWinners = users.random(giveawayData.winnersCount).filter((u) => u);
             let winners = uWinners.map((w) => "<@"+w.id+">").join(", ");
